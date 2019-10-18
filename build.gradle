@@ -1,0 +1,37 @@
+buildscript {
+    ext.kotlin_version = '1.3.21' //1.2.71  / 1.3.21
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2' //ganti 3.3.2
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+      // classpath 'com.google.gms:google-services:1.5.0-beta2'//copy
+        //classpath 'com.google.gms:google-services:4.3.2'//copy dari tambahkan firebase sdk
+    //compile 'com.google.android.gms:play-services-location:8.3.0' //copy
+      //compile 'com.google.android.gms:play-services-gcm:8.3.0' //copy
+      classpath'com.google.gms:google-service:4.0.1'// baru
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+//apply plugin:'com.google.gms.google-service' //baru
